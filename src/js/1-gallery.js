@@ -1,5 +1,6 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const images = [
   {
     preview:
@@ -66,31 +67,28 @@ const images = [
   },
 ];
 
-const gallery = document.querySelector('.gallery');
 
-function createGalleryMarkup(images) {
-  return images
-    .map(
-      image => `
-  <li class="gallery-item">
-    <a class="gallery-link" href="${image.original}">
-      <img
-        class="gallery-image"
-        src="${image.preview}"
-        data-source="${image.original}"
-        alt="${image.description}"
-      />
-    </a>
-  </li>`
-    )
-    .join('');
+const gallery = document.querySelector(".gallery");
+gallery.insertAdjacentHTML("beforeend", createCardsMarkup(images));
+
+function createCardsMarkup(cards) {
+    return cards.map(card => {
+        return `<li class="gallery-item">
+                    <a class="gallery-link" href="${card.original}">
+                        <img
+                            class="gallery-image"
+                            src="${card.preview}"
+                            alt="${card.description}"
+                            width="360"
+                            height="200"
+                        />
+                    </a>
+                </li>`;
+    }).join("");
 }
 
-gallery.innerHTML = createGalleryMarkup(images);
-
-new SimpleLightbox('.gallery a', {
-  captions: true,
-  captionsData: `alt`,
-  captionDelay: 250,
-  animationSpeed: 350,
+new SimpleLightbox(".gallery a", {
+    captionsData: "alt",
+    captionDelay: 250,
+    navText: ["←","→"], 
 });
