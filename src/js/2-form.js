@@ -52,4 +52,3 @@ function loadFormData() {
         textarea.value = formData.message || "";
     }
 }
-}
